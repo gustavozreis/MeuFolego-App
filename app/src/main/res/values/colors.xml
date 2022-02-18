@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- "main_light" é a cor principal dos backgrounds
+      as cores secundárias são todas turquesa, e
+      estão em ordem de mais clara(1) para mais
+      escura (4) -->
+
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="main_light">#fffffa</color>
+    <color name="secondary_1">#78cdd7</color>
+    <color name="secondary_2">#44a1a0</color>
+    <color name="secondary_3">#247b7b</color>
+    <color name="secondary_4">#0d5c63</color>
 </resources>
