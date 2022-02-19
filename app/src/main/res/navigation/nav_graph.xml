@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/startFragment"
         android:name="com.gustavozreis.meufolego.fragments.StartFragment"
-        android:label="StartFragment" >
+        android:label="Meu Fôlego">
         <action
             android:id="@+id/action_startFragment_to_recordsFragment"
             app:destination="@id/recordsFragment" />
@@ -15,5 +15,5 @@
     <fragment
         android:id="@+id/recordsFragment"
         android:name="com.gustavozreis.meufolego.fragments.RecordsFragment"
-        android:label="RecordsFragment" />
+        android:label="Meus Melhores Fôlegos" />
 </navigation>

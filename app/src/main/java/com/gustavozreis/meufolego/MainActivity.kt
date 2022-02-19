@@ -5,10 +5,12 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.gustavozreis.meufolego.databinding.FragmentStartBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
+    private var binding: FragmentStartBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,11 +18,13 @@ class MainActivity : AppCompatActivity() {
 
         // define o controlador de navegação
         val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_graph) as NavHostFragment
+            .findFragmentById(R.id.nav_graph_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
         // função que altera o título da action bar automaticamente
         setupActionBarWithNavController(navController)
 
     }
+
+
 }
