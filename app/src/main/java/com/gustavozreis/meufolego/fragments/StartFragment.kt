@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.MotionEvent.*
 import android.view.View
 import android.view.ViewGroup
@@ -13,22 +12,35 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.gustavozreis.meufolego.TimeApplication
+import com.gustavozreis.meufolego.data.Time
+import com.gustavozreis.meufolego.data.TimeDao
 import com.gustavozreis.meufolego.databinding.FragmentStartBinding
 import com.gustavozreis.meufolego.viewmodel.TimeViewModel
+import com.gustavozreis.meufolego.viewmodel.TimeViewModelFactory
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class StartFragment : Fragment() {
 
     private var binding: FragmentStartBinding? = null // vinculação de visualização
-
-    private val timeViewModel: TimeViewModel by activityViewModels() // instância do viewModel
 
     var cronometro: Chronometer? = null // instância do cronometro
 
     // vinculacao dos views
     var btnBotao: ImageButton? = null
     var tvTextoInstrucao: TextView? = null
-    var textoTeste: TextView? = null
+    var tvTempoFinal: TextView? = null
 
+    // instância do viewModel
+    private val viewModel: TimeViewModel by activityViewModels {
+        TimeViewModelFactory(
+            (activity?.application as TimeApplication).database.timeDao()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +53,7 @@ class StartFragment : Fragment() {
     ): View? {
         binding = FragmentStartBinding.inflate(inflater, container, false)
         return binding?.root // vincula o fragment ao layout
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -50,7 +63,7 @@ class StartFragment : Fragment() {
 
         btnBotao = binding?.ibImageButton
         tvTextoInstrucao = binding?.tvInstrucao
-        textoTeste = binding?.tvTextoTeste
+        tvTempoFinal = binding?.tvTextoTeste
 
         // define as ações a serem tomadas se o botao esta pressionado ou não
         btnBotao?.setOnTouchListener { _, motionEvent ->
@@ -74,9 +87,18 @@ class StartFragment : Fragment() {
      */
     fun paraCronometro() {
         cronometro?.stop()
-        textoTeste?.text = cronometro?.text.toString()
+        tvTempoFinal?.text = cronometro?.text.toString()
         tvTextoInstrucao?.text = "Aperte e segure para iniciar a contagem."
+        timeParaViewModel()
     }
+
+    /*
+    Função que chama o viewmodel e envia o tempo final
+     */
+    fun timeParaViewModel() {
+       viewModel.adicionaTempoFinalAoDB(tvTempoFinal?.text.toString())
+    }
+
 
     // Retorna o valor do binding para nulo
     override fun onDestroyView() {
