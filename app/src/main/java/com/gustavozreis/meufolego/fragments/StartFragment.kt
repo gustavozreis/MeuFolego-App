@@ -58,14 +58,13 @@ class StartFragment : Fragment() {
             if (motionEvent.action == ACTION_UP) paraCronometro()
             true
         }
-
-
     }
 
     /*
     Função que inicia o cronometro
      */
     fun iniciaCronometro() {
+        cronometro?.base = SystemClock.elapsedRealtime()
         cronometro?.start()
         tvTextoInstrucao?.text = "Segure sua respiração!!"
     }
@@ -76,10 +75,8 @@ class StartFragment : Fragment() {
     fun paraCronometro() {
         cronometro?.stop()
         textoTeste?.text = cronometro?.text.toString()
-        cronometro?.base = SystemClock.elapsedRealtime()
         tvTextoInstrucao?.text = "Aperte e segure para iniciar a contagem."
     }
-
 
     // Retorna o valor do binding para nulo
     override fun onDestroyView() {
