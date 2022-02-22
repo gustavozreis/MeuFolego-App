@@ -31,8 +31,9 @@ class RecordListAdapter(private val records: List<Time>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: RecordListItemViewHolder, position: Int) {
-        holder.tempo.text = records[position].tempo
-        holder.dia.text = records[position].dia
+        val recordsList = records
+        holder.tempo.text = recordsList[position].tempo
+        holder.dia.text = recordsList[position].dia
     }
 
     override fun getItemCount(): Int {

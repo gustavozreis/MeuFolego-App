@@ -38,7 +38,7 @@ class RecordsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRecordsBinding.inflate(inflater, container, false)
-        val listaDeRecordes: List<Time> = viewModel.criarListaRecordes()
+        val listaDeRecordes: ArrayList<Time> = viewModel.criarListaRecordes()
         recyclerView = binding?.rvRecordes
         recyclerView?.adapter = RecordListAdapter(listaDeRecordes)
         return binding?.root

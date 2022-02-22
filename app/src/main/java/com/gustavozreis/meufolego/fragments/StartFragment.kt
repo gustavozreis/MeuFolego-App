@@ -23,6 +23,9 @@ import com.gustavozreis.meufolego.viewmodel.TimeViewModelFactory
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.gustavozreis.meufolego.R
 
 class StartFragment : Fragment() {
 
@@ -34,6 +37,7 @@ class StartFragment : Fragment() {
     var btnBotao: ImageButton? = null
     var tvTextoInstrucao: TextView? = null
     var tvTempoFinal: TextView? = null
+    var btnBotaoMeusRecordes: TextView? = null
 
     // instância do viewModel
     private val viewModel: TimeViewModel by activityViewModels {
@@ -63,12 +67,18 @@ class StartFragment : Fragment() {
         btnBotao = binding?.ibImageButton
         tvTextoInstrucao = binding?.tvInstrucao
         tvTempoFinal = binding?.tvTextoTeste
+        btnBotaoMeusRecordes = binding?.btnMeusRecordes
 
         // define as ações a serem tomadas se o botao esta pressionado ou não
         btnBotao?.setOnTouchListener { _, motionEvent ->
             if (motionEvent.action == ACTION_DOWN) iniciaCronometro()
             if (motionEvent.action == ACTION_UP) paraCronometro()
             true
+        }
+
+        // muda de fragment ao clicar no botão
+        btnBotaoMeusRecordes?.setOnClickListener {
+            findNavController().navigate(R.id.action_startFragment_to_recordsFragment)
         }
     }
 
