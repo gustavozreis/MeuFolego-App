@@ -15,6 +15,12 @@ import com.gustavozreis.meufolego.databinding.RecordsListItemBinding
 
 class RecordListAdapter(private val records: List<Time>) : RecyclerView.Adapter<RecordListAdapter.RecordListItemViewHolder>() {
 
+    class RecordListItemViewHolder(private val binding: RecordsListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        // referencia os views que serão utilizados
+        val tempo: TextView = binding.tvTempo
+        val dia: TextView = binding.tvDia
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordListItemViewHolder {
         return RecordListItemViewHolder(
@@ -33,11 +39,4 @@ class RecordListAdapter(private val records: List<Time>) : RecyclerView.Adapter<
         return records.size
     }
 
-}
-
-class RecordListItemViewHolder(private val binding: RecordsListItemBinding) :
-    RecyclerView.ViewHolder(binding.root) {
-    // referencia os views que serão utilizados
-    val tempo: TextView = binding.tvTempo
-    val dia: TextView = binding.tvDia
 }

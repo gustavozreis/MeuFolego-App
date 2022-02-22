@@ -40,7 +40,7 @@ class RecordsFragment: Fragment() {
         binding = FragmentRecordsBinding.inflate(inflater, container, false)
         val listaDeRecordes: List<Time> = viewModel.criarListaRecordes()
         recyclerView = binding?.rvRecordes
-        recyclerView.adapter = RecordListAdapter(listaDeRecordes)
+        recyclerView?.adapter = RecordListAdapter(listaDeRecordes)
         return binding?.root
     }
 

@@ -15,7 +15,7 @@ interface TimeDao {
     @Delete
     suspend fun delete(time: Time)
 
-    @Query("SELECT * from times ORDER BY time ASC")
+    @Query("SELECT * from recordes ORDER BY tempo DESC")
     fun pegarTempos(): Flow<List<Time>>
 
 }
