@@ -35,6 +35,8 @@ class TimeViewModel(private val timeDao: TimeDao) : ViewModel() {
 
 }
 
+// construtor para o viewmodel ter acesso ao banco de dados
+
 class TimeViewModelFactory(private val timeDao: TimeDao):ViewModelProvider.Factory {
 
       override fun <T : ViewModel> create(modelClass: Class<T>): T {
