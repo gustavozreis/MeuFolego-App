@@ -8,12 +8,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.gustavozreis.meufolego.data.Time
 import com.gustavozreis.meufolego.data.TimeDao
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.toCollection
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 import java.text.SimpleDateFormat
 import java.util.*
 
 class TimeViewModel(private val timeDao: TimeDao) : ViewModel() {
+
     /*
    Função que adiciona o tempo final ao banco de dados
     */
@@ -31,6 +36,21 @@ class TimeViewModel(private val timeDao: TimeDao) : ViewModel() {
         viewModelScope.launch {
             timeDao.insert(timeAdicionar)
         }
+    }
+
+    /*
+   Função que pega os tempos do banco de dados e os coloca em uma lista
+    */
+    fun criarListaRecordes(): ArrayList<Time> {
+        val listaRecordes: ArrayList<Time> = arrayListOf()
+        viewModelScope.launch {
+            timeDao.pegarTempos().collect { listaRecordesFlow ->
+                for (tempo in listaRecordesFlow) {
+                    listaRecordes.add(tempo)
+                }
+            }
+        }
+        return listaRecordes
     }
 
 }

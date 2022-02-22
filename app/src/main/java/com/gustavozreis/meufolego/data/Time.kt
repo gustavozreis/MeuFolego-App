@@ -4,12 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "times")
+@Entity(tableName = "recordes")
 data class Time(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    @ColumnInfo(name = "time")
-    val thisTime: String,
-    @ColumnInfo(name = "date")
-    val timeDate: String
+    @ColumnInfo(name = "tempo")
+    val tempo: String,
+    @ColumnInfo(name = "dia")
+    val dia: String
 )

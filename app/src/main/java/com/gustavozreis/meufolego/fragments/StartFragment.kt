@@ -60,7 +60,6 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         cronometro = binding?.crTempoPassado
-
         btnBotao = binding?.ibImageButton
         tvTextoInstrucao = binding?.tvInstrucao
         tvTempoFinal = binding?.tvTextoTeste
