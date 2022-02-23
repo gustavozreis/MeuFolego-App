@@ -43,12 +43,14 @@ class RecordsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRecordsBinding.inflate(inflater, container, false)
+        val listaDeRecordes: ArrayList<Time> = arrayListOf()
 
-        viewModel.todosTempos.observe(viewLifecycleOwner, Observer { todosTempos ->
+        viewModel.todosTempos.observe(this.viewLifecycleOwner) { todosTempos ->
+            for (tempo in todosTempos) {
+                listaDeRecordes.add(tempo)
+            }
+        }
 
-        })
-
-        val listaDeRecordes: LiveData<List<Time>> = viewModel.criarListaRecordes()
         val teste: TextView? = binding?.tvTempo
         teste?.text = listaDeRecordes[0].tempo
         recyclerView = binding?.rvRecordes

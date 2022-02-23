@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
     Esse adapter criei usando o viewbinding para testar e aprender esse tipo de implementação
  */
 
-class RecordListAdapter(private val records: Flow<List<Time>>) : RecyclerView.Adapter<RecordListAdapter.RecordListItemViewHolder>() {
+class RecordListAdapter(private val records: ArrayList<Time>) : RecyclerView.Adapter<RecordListAdapter.RecordListItemViewHolder>() {
 
     class RecordListItemViewHolder(private val binding: RecordsListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
