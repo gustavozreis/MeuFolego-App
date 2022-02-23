@@ -7,9 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.gustavozreis.meufolego.TimeApplication
 import com.gustavozreis.meufolego.adapters.RecordListAdapter
@@ -24,7 +21,7 @@ class RecordsFragment: Fragment() {
 
     private var binding: FragmentRecordsBinding? = null
 
-    var recyclerView: RecyclerView? = null
+    private lateinit var recyclerView: RecyclerView
 
     // instância do viewModel
     private val viewModel: TimeViewModel by activityViewModels {
@@ -43,18 +40,14 @@ class RecordsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRecordsBinding.inflate(inflater, container, false)
-        val listaDeRecordes: ArrayList<Time> = arrayListOf()
+        val listaDeRecordes: ArrayList<Time> = viewModel.criarListaRecordes()
 
-        viewModel.todosTempos.observe(this.viewLifecycleOwner) { todosTempos ->
-            for (tempo in todosTempos) {
-                listaDeRecordes.add(tempo)
-            }
-        }
+        val listaDeRecordesTeste: ArrayList<Time> = arrayListOf(Time(1, "1212", "11212"), Time(2,"2121", "2121"))
 
         val teste: TextView? = binding?.tvTempo
-        teste?.text = listaDeRecordes[0].tempo
-        recyclerView = binding?.rvRecordes
-        recyclerView?.adapter = RecordListAdapter(listaDeRecordes)
+        teste?.text = listaDeRecordesTeste[0].tempo
+        recyclerView = binding!!.rvRecordes
+        recyclerView.adapter = RecordListAdapter(context, listaDeRecordesTeste)
         return binding?.root
     }
 

@@ -1,5 +1,6 @@
 package com.gustavozreis.meufolego.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +15,11 @@ import kotlinx.coroutines.flow.Flow
     Esse adapter criei usando o viewbinding para testar e aprender esse tipo de implementação
  */
 
-class RecordListAdapter(private val records: ArrayList<Time>) : RecyclerView.Adapter<RecordListAdapter.RecordListItemViewHolder>() {
+class RecordListAdapter(
+    private val context: Context?,
+    private val records: ArrayList<Time>) : RecyclerView.Adapter<RecordListAdapter.RecordListItemViewHolder>() {
 
-    class RecordListItemViewHolder(private val binding: RecordsListItemBinding) :
+    class RecordListItemViewHolder(binding: RecordsListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         // referencia os views que serão utilizados
         val tempo: TextView = binding.tvTempo
@@ -26,15 +29,14 @@ class RecordListAdapter(private val records: ArrayList<Time>) : RecyclerView.Ada
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordListItemViewHolder {
         return RecordListItemViewHolder(
             RecordsListItemBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false
-            )
+                LayoutInflater.from(parent.context), parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecordListItemViewHolder, position: Int) {
-        val recordsList = records
-        holder.tempo.text = recordsList[position].tempo
-        holder.dia.text = recordsList[position].dia
+        val recordeAtual = records[position]
+        holder.tempo.text = recordeAtual.tempo
+        holder.dia.text = recordeAtual.dia
     }
 
     override fun getItemCount(): Int {

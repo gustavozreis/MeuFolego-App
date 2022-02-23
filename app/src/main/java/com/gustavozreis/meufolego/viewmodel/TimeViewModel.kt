@@ -4,15 +4,14 @@ import androidx.lifecycle.*
 import com.gustavozreis.meufolego.data.Time
 import com.gustavozreis.meufolego.data.TimeDao
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class TimeViewModel(private val timeDao: TimeDao) : ViewModel() {
-
-    // pega lista de tempos
-    val todosTempos: LiveData<List<Time>> = timeDao.pegarTempos().asLiveData()
 
     /*
    Função que adiciona o tempo final ao banco de dados
@@ -37,8 +36,16 @@ class TimeViewModel(private val timeDao: TimeDao) : ViewModel() {
    Função que pega os tempos do banco de dados e os coloca em uma lista
     */
 
-    fun criarListaRecordes(): LiveData<List<Time>> {
-        return timeDao.pegarTempos().asLiveData()
+    fun criarListaRecordes(): ArrayList<Time> {
+        var todosTempos: ArrayList<Time> = arrayListOf()
+        viewModelScope.launch {
+            timeDao.pegarTempos().collect { todosTemposFlow ->
+                for (tempo in todosTemposFlow) {
+                    todosTempos.add(tempo)
+                }
+            }
+        }
+        return todosTempos
     }
 
 }
