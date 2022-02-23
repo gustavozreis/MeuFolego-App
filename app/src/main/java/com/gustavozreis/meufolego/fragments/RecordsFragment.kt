@@ -49,12 +49,14 @@ class RecordsFragment: Fragment() {
 
         var listaDeRecordes = ArrayList<Time>()
 
+        // cria um observador da lista de tempos e os adiciona a 'listaDeRecordes'
         viewModel.todosOsTempos.observe(this.viewLifecycleOwner) { todosTempos ->
             for (tempo in todosTempos) {
                 listaDeRecordes.add(tempo)
             }
         }
 
+        // criar e transmitir o adapter com a lista de tempos
         recyclerView = binding!!.rvRecordes
         recyclerView.adapter = RecordListAdapter(context, listaDeRecordes)
 
