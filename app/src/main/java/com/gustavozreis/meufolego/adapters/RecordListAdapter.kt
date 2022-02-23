@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gustavozreis.meufolego.data.Time
 import com.gustavozreis.meufolego.databinding.FragmentRecordsBinding
 import com.gustavozreis.meufolego.databinding.RecordsListItemBinding
+import kotlinx.coroutines.flow.Flow
 
 /*
     Esse adapter criei usando o viewbinding para testar e aprender esse tipo de implementação
  */
 
-class RecordListAdapter(private val records: List<Time>) : RecyclerView.Adapter<RecordListAdapter.RecordListItemViewHolder>() {
+class RecordListAdapter(private val records: Flow<List<Time>>) : RecyclerView.Adapter<RecordListAdapter.RecordListItemViewHolder>() {
 
     class RecordListItemViewHolder(private val binding: RecordsListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

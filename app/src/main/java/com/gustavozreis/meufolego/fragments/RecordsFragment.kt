@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.gustavozreis.meufolego.TimeApplication
 import com.gustavozreis.meufolego.adapters.RecordListAdapter
@@ -14,6 +18,7 @@ import com.gustavozreis.meufolego.data.TimeDao
 import com.gustavozreis.meufolego.databinding.FragmentRecordsBinding
 import com.gustavozreis.meufolego.viewmodel.TimeViewModel
 import com.gustavozreis.meufolego.viewmodel.TimeViewModelFactory
+import kotlinx.coroutines.flow.Flow
 
 class RecordsFragment: Fragment() {
 
@@ -38,7 +43,14 @@ class RecordsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRecordsBinding.inflate(inflater, container, false)
-        val listaDeRecordes: ArrayList<Time> = viewModel.criarListaRecordes()
+
+        viewModel.todosTempos.observe(viewLifecycleOwner, Observer { todosTempos ->
+
+        })
+
+        val listaDeRecordes: LiveData<List<Time>> = viewModel.criarListaRecordes()
+        val teste: TextView? = binding?.tvTempo
+        teste?.text = listaDeRecordes[0].tempo
         recyclerView = binding?.rvRecordes
         recyclerView?.adapter = RecordListAdapter(listaDeRecordes)
         return binding?.root
