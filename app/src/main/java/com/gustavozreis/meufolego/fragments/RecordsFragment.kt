@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.gustavozreis.meufolego.TimeApplication
 import com.gustavozreis.meufolego.adapters.RecordListAdapter
@@ -15,7 +16,10 @@ import com.gustavozreis.meufolego.data.TimeDao
 import com.gustavozreis.meufolego.databinding.FragmentRecordsBinding
 import com.gustavozreis.meufolego.viewmodel.TimeViewModel
 import com.gustavozreis.meufolego.viewmodel.TimeViewModelFactory
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class RecordsFragment: Fragment() {
 
@@ -30,29 +34,30 @@ class RecordsFragment: Fragment() {
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRecordsBinding.inflate(inflater, container, false)
-        val listaDeRecordes: ArrayList<Time> = viewModel.criarListaRecordes()
-
-        val listaDeRecordesTeste: ArrayList<Time> = arrayListOf(Time(1, "1212", "11212"), Time(2,"2121", "2121"))
-
-        val teste: TextView? = binding?.tvTempo
-        teste?.text = listaDeRecordesTeste[0].tempo
-        recyclerView = binding!!.rvRecordes
-        recyclerView.adapter = RecordListAdapter(context, listaDeRecordesTeste)
         return binding?.root
-    }
+        }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var listaDeRecordes = ArrayList<Time>()
+
+        viewModel.todosOsTempos.observe(this.viewLifecycleOwner) { todosTempos ->
+            for (tempo in todosTempos) {
+                listaDeRecordes.add(tempo)
+            }
+        }
+
+        recyclerView = binding!!.rvRecordes
+        recyclerView.adapter = RecordListAdapter(context, listaDeRecordes)
+
     }
 
     // Retorna o valor do binding para nulo
@@ -60,6 +65,19 @@ class RecordsFragment: Fragment() {
         super.onDestroyView()
         binding = null
     }
+
+   /* private fun criaListaTempos(timeDao: TimeDao): ArrayList<Time> {
+        var listaDeRecordes: ArrayList<Time> = arrayListOf()
+        lifecycleScope.launch {
+            timeDao.pegarTempos().collect { temposFlow ->
+                for (tempo in temposFlow) {
+                    listaDeRecordes.add(tempo)
+                    delay(200)
+                }
+            }
+        }
+        return listaDeRecordes
+    }*/
 
 
 }

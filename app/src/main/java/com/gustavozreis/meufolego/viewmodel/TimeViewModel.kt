@@ -13,6 +13,8 @@ import kotlin.collections.ArrayList
 
 class TimeViewModel(private val timeDao: TimeDao) : ViewModel() {
 
+    var todosOsTempos: LiveData<List<Time>> = timeDao.pegarTempos().asLiveData()
+
     /*
    Função que adiciona o tempo final ao banco de dados
     */
@@ -29,6 +31,7 @@ class TimeViewModel(private val timeDao: TimeDao) : ViewModel() {
         // insere a data no banco de dados
         viewModelScope.launch {
             timeDao.insert(timeAdicionar)
+
         }
     }
 
@@ -37,12 +40,15 @@ class TimeViewModel(private val timeDao: TimeDao) : ViewModel() {
     */
 
     fun criarListaRecordes(): ArrayList<Time> {
-        var todosTempos: ArrayList<Time> = arrayListOf()
+        //var todosTempos: ArrayList<Time> = arrayListOf(Time(1, "1212", "11212"), Time(2,"2121", "2121"))
+        var todosTempos = ArrayList<Time>()
         viewModelScope.launch {
             timeDao.pegarTempos().collect { todosTemposFlow ->
-                for (tempo in todosTemposFlow) {
-                    todosTempos.add(tempo)
-                }
+                //for (tempo in todosTemposFlow){
+                //    todosTempos.add(tempo)
+                //}
+                todosTempos.add(Time(1, "1212", "11212"))
+                todosTempos.add(Time(2, "13214", "675367"))
             }
         }
         return todosTempos
@@ -50,7 +56,7 @@ class TimeViewModel(private val timeDao: TimeDao) : ViewModel() {
 
 }
 
-// construtor para o viewmodel ter acesso ao banco de dados
+// builder para o viewmodel ter acesso ao banco de dados
 
 class TimeViewModelFactory(private val timeDao: TimeDao):ViewModelProvider.Factory {
 
