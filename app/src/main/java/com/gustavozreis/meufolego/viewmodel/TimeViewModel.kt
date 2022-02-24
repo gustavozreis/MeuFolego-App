@@ -10,8 +10,14 @@ import java.lang.IllegalArgumentException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import androidx.lifecycle.LiveData
 
 class TimeViewModel(private val timeDao: TimeDao) : ViewModel() {
+
+    // variavel que armazena o último tempo conseguido
+    var _ultimoTempo = MutableLiveData<String>("00:00")
+    val ultimoTempo: LiveData<String>
+        get() = _ultimoTempo
 
     // lista de livedata que é observada no fragment e utilizada no recyclerview
     var todosOsTempos: LiveData<List<Time>> = timeDao.pegarTempos().asLiveData()

@@ -69,6 +69,10 @@ class StartFragment : Fragment() {
         tvTempoFinal = binding?.tvTextoTeste
         btnBotaoMeusRecordes = binding?.btnMeusRecordes
 
+        // define o ultimo tempo como uma variavel do viewmodel para manter o dado ao
+        // recriar o fragment
+        tvTempoFinal?.text = viewModel.ultimoTempo.value
+
         // define as ações a serem tomadas se o botao esta pressionado ou não
         btnBotao?.setOnTouchListener { _, motionEvent ->
             if (motionEvent.action == ACTION_DOWN) iniciaCronometro()
@@ -96,6 +100,7 @@ class StartFragment : Fragment() {
      */
     fun paraCronometro() {
         cronometro?.stop()
+        viewModel._ultimoTempo.value = cronometro?.text.toString()
         tvTempoFinal?.text = cronometro?.text.toString()
         tvTextoInstrucao?.text = "Aperte e segure para iniciar a contagem."
         timeParaViewModel()
