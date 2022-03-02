@@ -4,7 +4,8 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.LayoutInflater
-import android.view.MotionEvent.*
+import android.view.MotionEvent.ACTION_DOWN
+import android.view.MotionEvent.ACTION_UP
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Chronometer
@@ -12,20 +13,12 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.gustavozreis.meufolego.R
 import com.gustavozreis.meufolego.TimeApplication
-import com.gustavozreis.meufolego.data.Time
-import com.gustavozreis.meufolego.data.TimeDao
 import com.gustavozreis.meufolego.databinding.FragmentStartBinding
 import com.gustavozreis.meufolego.viewmodel.TimeViewModel
 import com.gustavozreis.meufolego.viewmodel.TimeViewModelFactory
-import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import com.gustavozreis.meufolego.R
 
 class StartFragment : Fragment() {
 
@@ -110,7 +103,7 @@ class StartFragment : Fragment() {
     Função que chama o viewmodel e envia o tempo final
      */
     fun timeParaViewModel() {
-       viewModel.adicionaTempoFinalAoDB(tvTempoFinal?.text.toString())
+        viewModel.adicionaTempoFinalAoDB(tvTempoFinal?.text.toString())
     }
 
 

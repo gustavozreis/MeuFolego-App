@@ -4,28 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
 import com.gustavozreis.meufolego.TimeApplication
 import com.gustavozreis.meufolego.adapters.RecordListAdapter
 import com.gustavozreis.meufolego.data.Time
-import com.gustavozreis.meufolego.data.TimeDao
 import com.gustavozreis.meufolego.databinding.FragmentRecordsBinding
 import com.gustavozreis.meufolego.viewmodel.TimeViewModel
 import com.gustavozreis.meufolego.viewmodel.TimeViewModelFactory
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
-class RecordsFragment: Fragment() {
+class RecordsFragment : Fragment() {
 
     private var binding: FragmentRecordsBinding? = null
-
-    private lateinit var recyclerView: RecyclerView
 
     // instância do viewModel
     private val viewModel: TimeViewModel by activityViewModels {
@@ -41,24 +32,35 @@ class RecordsFragment: Fragment() {
     ): View? {
         binding = FragmentRecordsBinding.inflate(inflater, container, false)
         return binding?.root
-        }
-
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var listaDeRecordes = ArrayList<Time>()
+        // cria lista de tempos para passar para o adapter
+        val listaDeRecordes = ArrayList<Time>()
 
-        // cria um observador da lista de tempos e os adiciona a 'listaDeRecordes'
+        // criar e transmitir o adapter com a lista de tempos
+        val rvAdapter = RecordListAdapter(context, listaDeRecordes)
+        binding?.rvRecordes?.adapter = rvAdapter
+
+        // cria o observador e passa os valores dos tempos para a listaDeRecordes
         viewModel.todosOsTempos.observe(this.viewLifecycleOwner) { todosTempos ->
-            for (tempo in todosTempos) {
-                listaDeRecordes.add(tempo)
+            todosTempos.let {
+                rvAdapter.submitList(it)
             }
         }
 
-        // criar e transmitir o adapter com a lista de tempos
-        recyclerView = binding!!.rvRecordes
-        recyclerView.adapter = RecordListAdapter(context, listaDeRecordes)
+        // configuração botao apagar tempos
+        val btnApagar: Button? = binding?.btnApagar
+        btnApagar?.setOnClickListener {
+            viewModel.apagarTemposDoDB()
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
 
     }
 
@@ -67,19 +69,4 @@ class RecordsFragment: Fragment() {
         super.onDestroyView()
         binding = null
     }
-
-   /* private fun criaListaTempos(timeDao: TimeDao): ArrayList<Time> {
-        var listaDeRecordes: ArrayList<Time> = arrayListOf()
-        lifecycleScope.launch {
-            timeDao.pegarTempos().collect { temposFlow ->
-                for (tempo in temposFlow) {
-                    listaDeRecordes.add(tempo)
-                    delay(200)
-                }
-            }
-        }
-        return listaDeRecordes
-    }*/
-
-
 }

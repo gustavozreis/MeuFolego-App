@@ -2,14 +2,13 @@ package com.gustavozreis.meufolego.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.gustavozreis.meufolego.data.Time
-import com.gustavozreis.meufolego.databinding.FragmentRecordsBinding
 import com.gustavozreis.meufolego.databinding.RecordsListItemBinding
-import kotlinx.coroutines.flow.Flow
 
 /*
     Esse adapter criei usando o viewbinding para testar e aprender esse tipo de implementação
@@ -17,9 +16,10 @@ import kotlinx.coroutines.flow.Flow
 
 class RecordListAdapter(
     private val context: Context?,
-    private val records: ArrayList<Time>) : RecyclerView.Adapter<RecordListAdapter.RecordListItemViewHolder>() {
+    private val records: ArrayList<Time>
+) : ListAdapter<Time, RecordListAdapter.RecordListItemViewHolder>(DiffCallback) {
 
-    class RecordListItemViewHolder(binding: RecordsListItemBinding) :
+    class RecordListItemViewHolder(private var binding: RecordsListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         // referencia os views que serão utilizados
         val tempo: TextView = binding.tvTempo
@@ -29,18 +29,28 @@ class RecordListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordListItemViewHolder {
         return RecordListItemViewHolder(
             RecordsListItemBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false)
+                LayoutInflater.from(parent.context), parent, false
+            )
         )
     }
 
     override fun onBindViewHolder(holder: RecordListItemViewHolder, position: Int) {
-        val recordeAtual = records[position]
+        val recordeAtual = getItem(position)
         holder.tempo.text = recordeAtual.tempo
         holder.dia.text = recordeAtual.dia
     }
 
-    override fun getItemCount(): Int {
-        return records.size
+    // diffcallback para habilitar a atualização do recycler view quando os tempos são apagados
+    companion object {
+        private val DiffCallback = object : DiffUtil.ItemCallback<Time>() {
+            override fun areItemsTheSame(oldItem: Time, newItem: Time): Boolean {
+                return oldItem === newItem
+            }
+
+            override fun areContentsTheSame(oldItem: Time, newItem: Time): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
     }
 
 }

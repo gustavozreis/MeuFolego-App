@@ -18,4 +18,7 @@ interface TimeDao {
     @Query("SELECT * from recordes ORDER by tempo DESC")
     fun pegarTempos(): Flow<List<Time>>
 
+    @Query("DELETE from recordes")
+    suspend fun deletarTodosRecordes()
+
 }
