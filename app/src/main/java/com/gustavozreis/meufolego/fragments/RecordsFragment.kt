@@ -41,7 +41,7 @@ class RecordsFragment : Fragment() {
         val listaDeRecordes = ArrayList<Time>()
 
         // criar e transmitir o adapter com a lista de tempos
-        val rvAdapter = RecordListAdapter(context, listaDeRecordes)
+        val rvAdapter = RecordListAdapter()
         binding?.rvRecordes?.adapter = rvAdapter
 
         // cria o observador e passa os valores dos tempos para a listaDeRecordes

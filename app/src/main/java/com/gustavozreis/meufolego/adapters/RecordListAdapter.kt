@@ -1,6 +1,5 @@
 package com.gustavozreis.meufolego.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -15,8 +14,6 @@ import com.gustavozreis.meufolego.databinding.RecordsListItemBinding
  */
 
 class RecordListAdapter(
-    private val context: Context?,
-    private val records: ArrayList<Time>
 ) : ListAdapter<Time, RecordListAdapter.RecordListItemViewHolder>(DiffCallback) {
 
     class RecordListItemViewHolder(private var binding: RecordsListItemBinding) :
