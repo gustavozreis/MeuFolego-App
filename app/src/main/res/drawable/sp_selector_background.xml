@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:enterFadeDuration="8400"
+    android:exitFadeDuration="1000">
+    <item
+        android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/secondary_2" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@color/main_light"/>
+        </shape>
+    </item>
+</selector>
