@@ -11,4 +11,5 @@
     <color name="secondary_2">#44a1a0</color>
     <color name="secondary_3">#247b7b</color>
     <color name="secondary_4">#0d5c63</color>
+    <color name="opaque">#00000000</color>
 </resources>
