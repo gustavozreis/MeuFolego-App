@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:enterFadeDuration="8400"
+    android:enterFadeDuration="10400"
     android:exitFadeDuration="1000">
     <item
         android:state_pressed="true">

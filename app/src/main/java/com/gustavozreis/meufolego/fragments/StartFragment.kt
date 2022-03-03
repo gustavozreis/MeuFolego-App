@@ -1,6 +1,7 @@
 package com.gustavozreis.meufolego.fragments
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.Chronometer
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -55,6 +57,7 @@ class StartFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -89,6 +92,8 @@ class StartFragment : Fragment() {
         cronometro?.base = SystemClock.elapsedRealtime()
         cronometro?.start()
         tvTextoInstrucao?.text = "Segure sua respiração!!"
+        //clMain?.performContextClick(0.1f, 0.1f)
+        clMain?.setPressed(true)
     }
 
     /*
@@ -100,6 +105,7 @@ class StartFragment : Fragment() {
         tvTempoFinal?.text = cronometro?.text.toString()
         tvTextoInstrucao?.text = "Aperte e segure para iniciar a contagem."
         timeParaViewModel()
+        clMain?.setPressed(false)
     }
 
     /*
