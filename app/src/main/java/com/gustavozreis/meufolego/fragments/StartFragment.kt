@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Chronometer
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -27,10 +28,11 @@ class StartFragment : Fragment() {
     var cronometro: Chronometer? = null // instância do cronometro
 
     // vinculacao dos views
-    var btnBotao: ImageButton? = null
+    var btnBotao: ImageView? = null
     var tvTextoInstrucao: TextView? = null
     var tvTempoFinal: TextView? = null
     var btnBotaoMeusRecordes: TextView? = null
+    var clMain: View? = null
 
     // instância do viewModel
     private val viewModel: TimeViewModel by activityViewModels {
@@ -61,6 +63,7 @@ class StartFragment : Fragment() {
         tvTextoInstrucao = binding?.tvInstrucao
         tvTempoFinal = binding?.tvTextoTeste
         btnBotaoMeusRecordes = binding?.btnMeusRecordes
+        clMain = binding?.clMain
 
         // define o ultimo tempo como uma variavel do viewmodel para manter o dado ao
         // recriar o fragment
@@ -103,6 +106,7 @@ class StartFragment : Fragment() {
     Função que chama o viewmodel e envia o tempo final
      */
     fun timeParaViewModel() {
+        if (!tvTempoFinal?.text.toString().equals("00:00")) // se o tempo for zero nao envia para DB
         viewModel.adicionaTempoFinalAoDB(tvTempoFinal?.text.toString())
     }
 
