@@ -102,7 +102,7 @@ class StartFragment : Fragment() {
     fun paraCronometro() {
         cronometro?.stop()
         viewModel._ultimoTempo.value = cronometro?.text.toString()
-        tvTempoFinal?.text = cronometro?.text.toString()
+        tvTempoFinal?.text = "Último fôlego:\n ${cronometro?.text.toString()}"
         tvTextoInstrucao?.text = "Aperte e segure para iniciar a contagem."
         timeParaViewModel()
         clMain?.setPressed(false)
@@ -112,8 +112,8 @@ class StartFragment : Fragment() {
     Função que chama o viewmodel e envia o tempo final
      */
     fun timeParaViewModel() {
-        if (!tvTempoFinal?.text.toString().equals("00:00")) // se o tempo for zero nao envia para DB
-        viewModel.adicionaTempoFinalAoDB(tvTempoFinal?.text.toString())
+        if (!cronometro?.text.toString().equals("00:00")) // se o tempo for zero nao envia para DB
+        viewModel.adicionaTempoFinalAoDB(cronometro?.text.toString())
     }
 
 
