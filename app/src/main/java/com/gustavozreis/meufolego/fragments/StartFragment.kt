@@ -70,7 +70,7 @@ class StartFragment : Fragment() {
 
         // define o ultimo tempo como uma variavel do viewmodel para manter o dado ao
         // recriar o fragment
-        tvTempoFinal?.text = viewModel.ultimoTempo.value
+        tvTempoFinal?.text = "Último fôlego:\n ${viewModel.ultimoTempo.value}"
 
         // define as ações a serem tomadas se o botao esta pressionado ou não
         btnBotao?.setOnTouchListener { _, motionEvent ->
