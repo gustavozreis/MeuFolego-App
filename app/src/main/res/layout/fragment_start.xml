@@ -10,72 +10,82 @@
     android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true">
 
-        <Chronometer
-            android:id="@+id/cr_tempo_passado"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50sp"
-            app:layout_constraintBottom_toTopOf="@id/tv_instrucao"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:clickable="true"
+            android:focusable="true">
 
-        <TextView
-            android:id="@+id/tv_instrucao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:text="Aperte e segure para iniciar a contagem:"
-            app:layout_constraintBottom_toTopOf="@+id/ib_imageButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cr_tempo_passado" />
+            <Chronometer
+                android:id="@+id/cr_tempo_passado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="50sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_instrucao"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ib_imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:background="@color/opaque"
-            app:layout_constraintBottom_toTopOf="@id/tv_texto_teste"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_instrucao"
-            app:srcCompat="@drawable/sp_main_button" />
+            <TextView
+                android:id="@+id/tv_instrucao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="Aperte e segure para iniciar a contagem:"
+                app:layout_constraintBottom_toTopOf="@+id/ib_imageButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cr_tempo_passado" />
 
-        <TextView
-            android:id="@+id/tv_texto_teste"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TESTE"
-            android:textSize="30sp"
-            android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@id/btn_meus_recordes"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ib_imageButton" />
+            <ImageView
+                android:id="@+id/ib_imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:background="@color/opaque"
+                app:layout_constraintBottom_toTopOf="@id/tv_texto_teste"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_instrucao"
+                app:srcCompat="@drawable/sp_main_button" />
 
-        <TextView
-            android:id="@+id/btn_meus_recordes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/secondary_3"
-            android:padding="8dp"
-            android:text="MEUS RECORDES"
-            android:textColor="@color/main_light"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_texto_teste" />
+            <TextView
+                android:id="@+id/tv_texto_teste"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TESTE"
+                android:textSize="25sp"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@id/btn_meus_recordes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ib_imageButton" />
 
+            <TextView
+                android:id="@+id/btn_meus_recordes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/secondary_3"
+                android:padding="8dp"
+                android:text="MEUS RECORDES"
+                android:textColor="@color/main_light"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_texto_teste" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
