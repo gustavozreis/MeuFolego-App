@@ -1,5 +1,8 @@
 package com.gustavozreis.meufolego.fragments
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +10,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.gustavozreis.meufolego.R
 import com.gustavozreis.meufolego.TimeApplication
 import com.gustavozreis.meufolego.adapters.RecordListAdapter
 import com.gustavozreis.meufolego.data.Time
+import com.gustavozreis.meufolego.databinding.DialogLayoutBinding
 import com.gustavozreis.meufolego.databinding.FragmentRecordsBinding
 import com.gustavozreis.meufolego.viewmodel.TimeViewModel
 import com.gustavozreis.meufolego.viewmodel.TimeViewModelFactory
@@ -54,7 +59,7 @@ class RecordsFragment : Fragment() {
         // configuração botao apagar tempos
         val btnApagar: Button? = binding?.btnApagar
         btnApagar?.setOnClickListener {
-            viewModel.apagarTemposDoDB()
+            criaAlertaAoApagarFolegos()
         }
 
     }
@@ -68,5 +73,23 @@ class RecordsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    /*
+    Função que cria o alertdialog
+     */
+    private fun criaAlertaAoApagarFolegos() {
+        val dialog = Dialog(requireContext())
+        val dialogBinding = DialogLayoutBinding.inflate(layoutInflater)
+        dialog.setContentView(dialogBinding.root)
+        dialog.setCanceledOnTouchOutside(true)
+        dialogBinding.tvSim.setOnClickListener {
+            viewModel.apagarTemposDoDB()
+            dialog.dismiss()
+        }
+        dialogBinding.tvCancelar.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 }
