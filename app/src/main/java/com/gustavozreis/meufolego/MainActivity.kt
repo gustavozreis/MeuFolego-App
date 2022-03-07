@@ -21,9 +21,6 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_graph_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        // função que altera o título da action bar automaticamente
-        setupActionBarWithNavController(navController)
-
     }
 
 
