@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Meu Folego</string>
-    <string name="recordsFragment_20melhores">Esse são seus 20 melhores fôlegos:</string>
+    <string name="recordsFragment_20melhores">Esses são seus 20 melhores fôlegos:</string>
     <string name="tempo">Tempo</string>
-    <string name="dia">DIA</string>
+    <string name="dia">Dia</string>
     <string name="btn_apagar_tempos">APAGAR TODOS OS TEMPOS</string>
     <string name="instrucao_principal">Aperte e segure para iniciar a contagem:</string>
     <string name="meus_melhores">VER MEUS MELHORES FÔLEGOS</string>
