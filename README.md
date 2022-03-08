@@ -1,9 +1,12 @@
 # MeuFolego-App
 
-O App Meu Fôlego é mais um projeto pessoal do meu aprendizado em Desenvolvimento Mobile para Android.
-Seu funcionamento é bem simples: aperte e segure o botão e descubra quanto tempo consegue segurar sua respiração.
-O background do fragmento inicial altera a cor quanto maior for o tempo passado.
-Seus melhores tempos são armazenados e podem ser acessados e também apagados no segundo fragmento.
+O App Meu Fôlego é mais um projeto pessoal do meu aprendizado em Desenvolvimento Mobile para Android. Dessa vez o foco foi persistência de dados.
+
+Seu funcionamento é bem simples: ao apertar e segurar o botão é mostrado na tela o tempo passado. Ao mesmo tempo o background do fragment muda gradualmente sua cor para um tom mais escuro.
+
+Ao soltar o botão, seu tempo é gravado enviado para o banco de dados do celular. 
+
+Seus melhores tempos são armazenados e podem ser acessados e apagados no segundo fragmento.
 
 Para a construção desse projeto utilizei:
 - View Binding
