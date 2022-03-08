@@ -6,13 +6,13 @@ O background do fragmento inicial altera a cor quanto maior for o tempo passado.
 Seus melhores tempos são armazenados e podem ser acessados e também apagados no segundo fragmento.
 
 Para a construção desse projeto utilizei:
-    - View Binding
-    - Manipulação de views
-    - Recycler View
-    - Alert Dialog
-    - Cronômetro  
+-View Binding
+-Manipulação de views
+-Recycler View
+-Alert Dialog
+-Cronômetro  
     Persistência de dados com:
-    - View Model
-    - Live Data
-    - Biblioteca Room
-    - SQLite
+-View Model
+-Live Data
+-Biblioteca Room
+-SQLite
