@@ -9,6 +9,7 @@ Para a construção desse projeto utilizei:
 - View Binding
 - Manipulação da UI
 - Cronômetro
+
 Para a persistência de dados:
 - View Model
 - Biblioteca Room
