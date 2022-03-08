@@ -11,7 +11,8 @@ Para a construção desse projeto utilizei:
 - Recycler View
 - Alert Dialog
 - Cronômetro  
-    Persistência de dados com:
+
+Persistência de dados com:
 - View Model
 - Live Data
 - Biblioteca Room
