@@ -10,7 +10,6 @@ import android.view.MotionEvent.ACTION_UP
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Chronometer
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -27,24 +26,19 @@ class StartFragment : Fragment() {
 
     private var binding: FragmentStartBinding? = null // vinculação de visualização
 
-    var cronometro: Chronometer? = null // instância do cronometro
+    private var btnBotao: ImageView? = null
+    private var tvTextoInstrucao: TextView? = null
+    private var tvTempoFinal: TextView? = null
+    private var btnBotaoMeusRecordes: TextView? = null
+    private var clMain: View? = null
 
-    // vinculacao dos views
-    var btnBotao: ImageView? = null
-    var tvTextoInstrucao: TextView? = null
-    var tvTempoFinal: TextView? = null
-    var btnBotaoMeusRecordes: TextView? = null
-    var clMain: View? = null
+    private var cronometro: Chronometer? = null // instância do cronometro
 
     // instância do viewModel
     private val viewModel: TimeViewModel by activityViewModels {
         TimeViewModelFactory(
             (activity?.application as TimeApplication).database.timeDao()
         )
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -61,18 +55,17 @@ class StartFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cronometro = binding?.crTempoPassado
-        btnBotao = binding?.ibImageButton
-        tvTextoInstrucao = binding?.tvInstrucao
-        tvTempoFinal = binding?.tvTextoTeste
-        btnBotaoMeusRecordes = binding?.btnMeusRecordes
-        clMain = binding?.clMain
 
-        // define o ultimo tempo como uma variavel do viewmodel para manter o dado ao
-        // recriar o fragment
+        configuraViewBinding()
+        configuraListenersDeClique()
+
+        // define o ultimo tempo como uma variavel do viewmodel para manter o dado ao recriar o fragment
         tvTempoFinal?.text = "Último fôlego: ${viewModel.ultimoTempo.value}"
 
-        // define as ações a serem tomadas se o botao esta pressionado ou não
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun configuraListenersDeClique() {
         btnBotao?.setOnTouchListener { _, motionEvent ->
             if (motionEvent.action == ACTION_DOWN) iniciaCronometro()
             if (motionEvent.action == ACTION_UP) paraCronometro()
@@ -85,21 +78,30 @@ class StartFragment : Fragment() {
         }
     }
 
+    private fun configuraViewBinding() {
+        cronometro = binding?.crTempoPassado
+        btnBotao = binding?.ibImageButton
+        tvTextoInstrucao = binding?.tvInstrucao
+        tvTempoFinal = binding?.tvTextoTeste
+        btnBotaoMeusRecordes = binding?.btnMeusRecordes
+        clMain = binding?.clMain
+    }
+
     /*
     Função que inicia o cronometro
      */
-    fun iniciaCronometro() {
+    private fun iniciaCronometro() {
         cronometro?.base = SystemClock.elapsedRealtime()
         cronometro?.start()
         tvTextoInstrucao?.text = "Segure sua respiração!!"
         //clMain?.performContextClick(0.1f, 0.1f)
-        clMain?.setPressed(true)
+        clMain?.isPressed = true
     }
 
     /*
     Função que pausa o cronometro
      */
-    fun paraCronometro() {
+    private fun paraCronometro() {
         cronometro?.stop()
         viewModel._ultimoTempo.value = cronometro?.text.toString()
         tvTempoFinal?.text = "Último fôlego: ${cronometro?.text.toString()}"
@@ -111,7 +113,7 @@ class StartFragment : Fragment() {
     /*
     Função que chama o viewmodel e envia o tempo final
      */
-    fun timeParaViewModel() {
+    private fun timeParaViewModel() {
         if (!cronometro?.text.toString().equals("00:00")) // se o tempo for zero nao envia para DB
         viewModel.adicionaTempoFinalAoDB(cronometro?.text.toString())
     }

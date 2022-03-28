@@ -46,18 +46,6 @@ class TimeViewModel(private val timeDao: TimeDao) : ViewModel() {
             timeDao.deletarTodosRecordes()
         }
     }
-
-    /*
-    Função que pega os tempos do banco de dados e os coloca em uma lista
-    [NÃO FUNCIONA, É USADO LIVEDATA e .observe NO FRAGMENTO]
-     */
-
-    //fun criarListaRecordes(): ArrayList<Time> {
-    //var todosTempos: ArrayList<Time> = arrayListOf(Time(1, "1212", "11212"), Time(2,"2121", "2121"))
-    //var todosTempos = ArrayList<Time>()
-    //return todosTempos
-    //}
-
 }
 
 // builder para o viewmodel ter acesso ao banco de dados

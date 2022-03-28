@@ -13,10 +13,9 @@ import com.gustavozreis.meufolego.databinding.RecordsListItemBinding
     Esse adapter criei usando o viewbinding para testar e aprender esse tipo de implementação
  */
 
-class RecordListAdapter(
-) : ListAdapter<Time, RecordListAdapter.RecordListItemViewHolder>(DiffCallback) {
+class RecordListAdapter : ListAdapter<Time, RecordListAdapter.RecordListItemViewHolder>(DiffCallback) {
 
-    class RecordListItemViewHolder(private var binding: RecordsListItemBinding) :
+    class RecordListItemViewHolder(binding: RecordsListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         // referencia os views que serão utilizados
         val tempo: TextView = binding.tvTempo
