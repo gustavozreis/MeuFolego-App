@@ -1,5 +1,9 @@
 # MeuFolego-App
 
+
+https://user-images.githubusercontent.com/66447409/160703144-ea0a4eff-989d-4da5-ac99-e7d9d9f0ab43.mp4
+
+
 O App Meu Fôlego é mais um projeto pessoal do meu aprendizado em Desenvolvimento Mobile para Android. Dessa vez o foco foi persistência de dados.
 
 Seu funcionamento é bem simples: ao apertar e segurar o botão é mostrado na tela o tempo passado. Ao mesmo tempo o background do fragment muda gradualmente sua cor para um tom mais escuro.
